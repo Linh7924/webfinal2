@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Cho phép các phương thức GET, POST, PUT, DELETE
+RewriteCond %{REQUEST_METHOD} !^(GET|POST|PUT|DELETE)$ [NC]
+RewriteRule .* - [R=405,L]
+
+# Cho phép truy cập từ mọi nguồn (chỉ dùng cho môi trường development)
+Header always set Access-Control-Allow-Origin "*"
+Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+Header always set Access-Control-Allow-Headers "Content-Type"
