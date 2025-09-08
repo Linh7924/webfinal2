@@ -1,4 +1,8 @@
 <?php
+// Bắt đầu session
+session_start();
+
+// Xử lý dữ liệu form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $exercise = $_POST['exercise'] ?? '';
     
@@ -21,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         case '4':
             // Bài 4: Nhập số cho đến khi nhập số 0 thì dừng
-            session_start();
             if (!isset($_SESSION['numbers'])) {
                 $_SESSION['numbers'] = [];
             }
@@ -161,4 +164,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Bài 11: Form đăng nhập
             if (isset($_POST['username']) && isset($_POST['password'])) {
                 $username = htmlspecialchars($_POST['username']);
-                $password = htmlspecial
+                $password = htmlspecialchars($_POST['password']);
+                $remember = isset($_POST['remember']) ? "Có" : "Không";
+                
+                echo "<strong>Thông tin đăng nhập:</strong><br>";
+                echo "Username: $username<br>";
+                echo "Password: ********<br>";
+                echo "Remember Me: $remember";
+            }
+            break;
+            
+        case '11_register':
+            // Bài 11: Form đăng ký
+            if (isset($_POST['new-username']) && isset($_POST['email']) && isset($_POST['title']) && 
+                isset($_POST['fullname']) && isset($_POST['company'])) {
+                
+                $username = htmlspecialchars($_POST['new-username']);
+                $email = htmlspecialchars($_POST['email']);
+                $title = htmlspecialchars($_POST['title']);
+                $fullname = htmlspecialchars($_POST['fullname']);
+                $company = htmlspecialchars($_POST['company']);
+                $agree = isset($_POST['agree']) ? "Đồng ý" : "Không đồng ý";
+                
+                echo "<strong>Thông tin đăng ký:</strong><br>";
+                echo "Username: $username<br>";
+                echo "Email: $email<br>";
+                echo "Title: $title<br>";
+                echo "Fullname: $fullname<br>";
+                echo "Company: $company<br>";
+                echo "Agree: $agree";
+            }
+            break;
+            
+        default:
+            echo "Vui lòng chọn bài tập và nhập dữ liệu";
+            break;
+    }
+} else {
+    echo "Vui lòng chọn bài tập và nhập dữ liệu";
+}
+?>
