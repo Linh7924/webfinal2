@@ -4,352 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thực Hành Cơ Bản với HTML, CSS, PHP</title>
-    <style>
-        /* Biến màu sắc */
-        :root {
-            --primary-color: #ff4081;
-            --secondary-color: #f8bbd0;
-            --light-pink: #fce4ec;
-            --dark-pink: #ec407a;
-            --white: #ffffff;
-            --light-gray: #f5f5f5;
-            --text-color: #333333;
-        }
-        
-        /* Reset và thiết lập chung */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--white);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-pink));
-            color: var(--white);
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, transparent 20%, var(--white) 20%, transparent 30%);
-            opacity: 0.05;
-            transform: rotate(30deg);
-        }
-        
-        .author-info {
-            flex: 2;
-        }
-        
-        .author-info h2 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        
-        .author-info p {
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-        
-        .header-right {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        
-        .header-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--white);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-        
-        .header-image:hover {
-            transform: scale(1.05) rotate(5deg);
-        }
-        
-        .search-bar {
-            display: flex;
-        }
-        
-        .search-bar input {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 30px 0 0 30px;
-            outline: none;
-            width: 200px;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .search-bar button {
-            padding: 10px 15px;
-            background-color: var(--white);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 0 30px 30px 0;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .search-bar button:hover {
-            background-color: var(--light-pink);
-        }
-        
-        /* Marquee */
-        .marquee-container {
-            background-color: var(--light-pink);
-            padding: 10px 0;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .marquee {
-            white-space: nowrap;
-            animation: marquee 15s linear infinite;
-            color: var(--dark-pink);
-            font-weight: bold;
-        }
-        
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        
-        /* Main layout */
-        .container {
-            display: flex;
-            min-height: calc(100vh - 200px);
-        }
-        
-        /* Sidebar navigation */
-        .sidebar {
-            width: 250px;
-            background-color: var(--light-pink);
-            padding: 20px 0;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .sidebar ul {
-            list-style: none;
-        }
-        
-        .sidebar li {
-            margin-bottom: 5px;
-        }
-        
-        .sidebar a {
-            display: block;
-            padding: 12px 20px;
-            color: var(--text-color);
-            text-decoration: none;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .sidebar a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            transition: left 0.5s;
-        }
-        
-        .sidebar a:hover::before {
-            left: 100%;
-        }
-        
-        .sidebar a:hover {
-            background-color: var(--secondary-color);
-            padding-left: 30px;
-        }
-        
-        .sidebar a.active {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-        
-        /* Main content */
-        .main-content {
-            flex: 1;
-            padding: 25px;
-            background-color: var(--white);
-        }
-        
-        .exercise {
-            display: none;
-            animation: fadeIn 0.5s;
-            background-color: var(--white);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-            border-left: 5px solid var(--primary-color);
-        }
-        
-        .exercise.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .exercise h2 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px dashed var(--secondary-color);
-        }
-        
-        .exercise h3 {
-            color: var(--dark-pink);
-            margin: 15px 0 10px;
-        }
-        
-        .code-block {
-            background-color: var(--light-gray);
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .result-box {
-            background-color: var(--light-pink);
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-        }
-        
-        /* Form styling */
-        form {
-            background-color: var(--light-gray);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-        
-        form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--dark-pink);
-        }
-        
-        form input[type="text"],
-        form input[type="number"],
-        form input[type="email"],
-        form input[type="password"],
-        form select,
-        form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid var(--secondary-color);
-            border-radius: 4px;
-            background-color: var(--white);
-        }
-        
-        form input[type="submit"] {
-            background-color: var(--primary-color);
-            color: var(--white);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        form input[type="submit"]:hover {
-            background-color: var(--dark-pink);
-        }
-        
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-pink));
-            color: var(--white);
-            text-align: center;
-            padding: 20px;
-            margin-top: auto;
-        }
-        
-        .social-icons {
-            margin-top: 10px;
-        }
-        
-        .social-icons a {
-            color: var(--white);
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: transform 0.3s;
-            display: inline-block;
-        }
-        
-        .social-icons a:hover {
-            transform: translateY(-5px);
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                order: 2;
-            }
-            
-            .main-content {
-                order: 1;
-            }
-            
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .header-right {
-                align-items: center;
-                margin-top: 15px;
-            }
-            
-            .author-info {
-                margin-bottom: 15px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header -->
@@ -363,8 +18,8 @@
         <div class="header-right">
             <img src="https://placehold.co/120x120/ff4081/ffffff?text=NKLinH" alt="Ảnh đại diện" class="header-image">
             <div class="search-bar">
-                <input type="text" placeholder="Tìm kiếm...">
-                <button type="submit">🔍</button>
+                <input type="text" placeholder="Tìm kiếm..." id="searchInput">
+                <button type="button" onclick="performSearch()">🔍</button>
             </div>
         </div>
     </header>
@@ -467,34 +122,153 @@ echo "Tổng chuỗi b là: " . round($resultB['sum'], 4);
 echo "&lt;br&gt;Số phần tử: " . $resultB['terms'];
                     </code></pre>
                 </div>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result2">Đang tính toán...</p>
+                </div>
             </section>
             
-            <!-- Các bài tập khác sẽ được thêm tương tự -->
+            <!-- Exercise 3 -->
             <section id="exercise3" class="exercise">
-                <h2>Bài 3: Tính giá trị biểu thức</h2>
-                <p>Nội dung bài 3 sẽ được hiển thị ở đây...</p>
+                <h2>Bài 3: Tính giá trị biểu thức S = 1 + 1/2 + 1/3 + ... + 1/n</h2>
+                <form method="post" action="calculate.php">
+                    <input type="hidden" name="exercise" value="3">
+                    <label for="n3">Nhập giá trị n:</label>
+                    <input type="number" id="n3" name="n" min="1" required>
+                    <input type="submit" value="Tính toán">
+                </form>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result3"><?php include 'calculate.php'; ?></p>
+                </div>
             </section>
             
+            <!-- Exercise 4 -->
             <section id="exercise4" class="exercise">
-                <h2>Bài 4: Nhập số đến khi gặp số 0</h2>
-                <p>Nội dung bài 4 sẽ được hiển thị ở đây...</p>
+                <h2>Bài 4: Nhập số cho đến khi nhập số 0 thì dừng</h2>
+                <form method="post" action="calculate.php">
+                    <input type="hidden" name="exercise" value="4">
+                    <label for="number">Nhập số (0 để kết thúc):</label>
+                    <input type="number" id="number" name="number" step="any" required>
+                    <input type="submit" value="Thêm số">
+                </form>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result4"><?php include 'calculate.php'; ?></p>
+                </div>
             </section>
             
+            <!-- Exercise 5 -->
             <section id="exercise5" class="exercise">
                 <h2>Bài 5: Kiểm tra số hoàn hảo</h2>
-                <p>Nội dung bài 5 sẽ được hiển thị ở đây...</p>
+                <form method="post" action="calculate.php">
+                    <input type="hidden" name="exercise" value="5">
+                    <label for="num5">Nhập số cần kiểm tra:</label>
+                    <input type="number" id="num5" name="number" min="1" required>
+                    <input type="submit" value="Kiểm tra">
+                </form>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result5"><?php include 'calculate.php'; ?></p>
+                </div>
             </section>
             
-            <!-- Bài 11: Form đăng nhập -->
+            <!-- Exercise 6 -->
+            <section id="exercise6" class="exercise">
+                <h2>Bài 6: Tính giai thừa</h2>
+                <form method="post" action="calculate.php">
+                    <input type="hidden" name="exercise" value="6">
+                    <label for="num6">Nhập số n:</label>
+                    <input type="number" id="num6" name="number" min="0" required>
+                    <input type="submit" value="Tính giai thừa">
+                </form>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result6"><?php include 'calculate.php'; ?></p>
+                </div>
+            </section>
+            
+            <!-- Exercise 7 -->
+            <section id="exercise7" class="exercise">
+                <h2>Bài 7: Liệt kê ước số</h2>
+                <form method="post" action="calculate.php">
+                    <input type="hidden" name="exercise" value="7">
+                    <label for="num7">Nhập số nguyên dương n:</label>
+                    <input type="number" id="num7" name="number" min="1" required>
+                    <input type="submit" value="Liệt kê ước số">
+                </form>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result7"><?php include 'calculate.php'; ?></p>
+                </div>
+            </section>
+            
+            <!-- Exercise 8 -->
+            <section id="exercise8" class="exercise">
+                <h2>Bài 8: Mảng số nguyên</h2>
+                <form method="post" action="calculate.php">
+                    <input type="hidden" name="exercise" value="8">
+                    <p>Nhập 10 số nguyên (cách nhau bằng dấu phẩy):</p>
+                    <input type="text" name="array" placeholder="Ví dụ: 1,-2,3,-4,5,6,-7,8,-9,10" required style="width: 300px;">
+                    <input type="submit" value="Phân tích mảng">
+                </form>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result8"><?php include 'calculate.php'; ?></p>
+                </div>
+            </section>
+            
+            <!-- Exercise 9 -->
+            <section id="exercise9" class="exercise">
+                <h2>Bài 9: Chuyển đổi thời gian</h2>
+                <form method="post" action="calculate.php">
+                    <input type="hidden" name="exercise" value="9">
+                    <label for="seconds">Nhập số giây:</label>
+                    <input type="number" id="seconds" name="seconds" min="0" required>
+                    <input type="submit" value="Chuyển đổi">
+                </form>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result9"><?php include 'calculate.php'; ?></p>
+                </div>
+            </section>
+            
+            <!-- Exercise 10 -->
+            <section id="exercise10" class="exercise">
+                <h2>Bài 10: Class Person và SinhVien</h2>
+                <form method="post" action="calculate.php">
+                    <input type="hidden" name="exercise" value="10">
+                    <label for="name">Họ tên:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="birthday">Ngày sinh:</label>
+                    <input type="date" id="birthday" name="birthday" required>
+                    
+                    <label for="hometown">Quê quán:</label>
+                    <input type="text" id="hometown" name="hometown" required>
+                    
+                    <label for="class">Lớp:</label>
+                    <input type="text" id="class" name="class" required>
+                    
+                    <input type="submit" value="Hiển thị thông tin">
+                </form>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result10"><?php include 'calculate.php'; ?></p>
+                </div>
+            </section>
+            
+            <!-- Exercise 11 -->
             <section id="exercise11" class="exercise">
-                <h2>Bài 11: Tạo form đăng nhập</h2>
+                <h2>Bài 11: Form đăng nhập</h2>
                 <div class="form-container">
                     <h3>Login with Facebook</h3>
                     
                     <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 300px; margin-right: 20px;">
                             <h4>Login</h4>
-                            <form>
+                            <form method="post" action="calculate.php">
+                                <input type="hidden" name="exercise" value="11_login">
                                 <label for="username">Username</label>
                                 <input type="text" id="username" name="username">
                                 
@@ -511,7 +285,8 @@ echo "&lt;br&gt;Số phần tử: " . $resultB['terms'];
                         
                         <div style="flex: 1; min-width: 300px;">
                             <h4>Signup for New Account?</h4>
-                            <form>
+                            <form method="post" action="calculate.php">
+                                <input type="hidden" name="exercise" value="11_register">
                                 <label for="new-username">User Name</label>
                                 <input type="text" id="new-username" name="new-username">
                                 
@@ -544,6 +319,10 @@ echo "&lt;br&gt;Số phần tử: " . $resultB['terms'];
                         </div>
                     </div>
                 </div>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result11"><?php include 'calculate.php'; ?></p>
+                </div>
             </section>
         </main>
     </div>
@@ -552,7 +331,7 @@ echo "&lt;br&gt;Số phần tử: " . $resultB['terms'];
     <footer>
         <p>&copy; 2023 - Trang web thực hành PHP</p>
         <p>Được thiết kế bởi Ngô Khánh Linh - Lớp Robot và Trí tuệ nhân tạo</p>
-        <p>Liên hệ: example@email.com</p>
+        <p>Liên hệ: klinh9398@email.com</p>
         <div class="social-icons">
             <a href="#">📱</a>
             <a href="#">💻</a>
@@ -560,49 +339,6 @@ echo "&lt;br&gt;Số phần tử: " . $resultB['terms'];
         </div>
     </footer>
 
-    <script>
-        // Xử lý chuyển đổi giữa các bài tập
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const exercises = document.querySelectorAll('.exercise');
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Xóa lớp active từ tất cả các liên kết và bài tập
-                    navLinks.forEach(item => item.classList.remove('active'));
-                    exercises.forEach(item => item.classList.remove('active'));
-                    
-                    // Thêm lớp active vào liên kết được nhấp
-                    this.classList.add('active');
-                    
-                    // Hiển thị bài tập tương ứng
-                    const targetId = this.getAttribute('data-target');
-                    document.getElementById(targetId).classList.add('active');
-                    
-                    // Cuộn đến bài tập
-                    document.getElementById(targetId).scrollIntoView({behavior: 'smooth'});
-                });
-            });
-            
-            // Tính toán kết quả bài 1
-            function isPrime(num) {
-                if (num < 2) return false;
-                for (let i = 2; i <= Math.sqrt(num); i++) {
-                    if (num % i === 0) return false;
-                }
-                return true;
-            }
-            
-            let sum = 0;
-            for (let i = 1; i <= 100; i++) {
-                if (isPrime(i)) {
-                    sum += i;
-                }
-            }
-            document.getElementById('result1').textContent = `Tổng các số nguyên tố từ 1 đến 100 là: ${sum}`;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
