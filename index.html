@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thực Hành Cơ Bản với HTML, CSS, PHP</title>
     <style>
+        /* Biến màu sắc */
         :root {
-            --primary-color: #ff69b4;
-            --secondary-color: #ffc0cb;
-            --light-color: #fff5f7;
-            --dark-color: #d64d7e;
-            --text-color: #333;
-            --menu-bg: #ffecf0;
-            --menu-active: #ff9dc0;
+            --primary-color: #ff4081;
+            --secondary-color: #f8bbd0;
+            --light-pink: #fce4ec;
+            --dark-pink: #ec407a;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --text-color: #333333;
         }
         
+        /* Reset và thiết lập chung */
         * {
             margin: 0;
             padding: 0;
@@ -23,249 +25,302 @@
         }
         
         body {
-            background-color: #fff;
+            background-color: var(--white);
             color: var(--text-color);
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
         
-        .container {
-            display: flex;
-            flex: 1;
-        }
-        
-        /* Header styles */
+        /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
-            color: white;
-            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-pink));
+            color: var(--white);
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .author-info {
-            text-align: left;
-        }
-        
-        .author-info h2 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .header-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Marquee styles */
-        .marquee {
-            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
-            padding: 10px 0;
-            color: white;
-            font-weight: bold;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Sidebar menu styles */
-        .sidebar {
-            width: 200px;
-            background-color: var(--menu-bg);
-            padding: 20px 0;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .menu {
-            list-style-type: none;
-        }
-        
-        .menu-item {
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
-        }
-        
-        .menu-item:hover {
-            background-color: var(--secondary-color);
-            border-left-color: var(--dark-color);
-        }
-        
-        .menu-item.active {
-            background-color: var(--menu-active);
-            border-left-color: var(--dark-color);
-            font-weight: bold;
-        }
-        
-        /* Main content styles */
-        .main-content {
-            flex: 1;
-            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
         }
         
-        .exercise-content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+        header::before {
+            content: '';
             position: absolute;
-            width: 100%;
-            padding: 20px;
-            left: 0;
-            top: 0;
-            display: none;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 20%, var(--white) 20%, transparent 30%);
+            opacity: 0.05;
+            transform: rotate(30deg);
         }
         
-        .exercise-content.active {
-            opacity: 1;
-            transform: translateY(0);
+        .author-info {
+            flex: 2;
+        }
+        
+        .author-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .author-info p {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        
+        .header-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .header-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .header-image:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .search-bar {
+            display: flex;
+        }
+        
+        .search-bar input {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            outline: none;
+            width: 200px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-bar button {
+            padding: 10px 15px;
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background-color: var(--light-pink);
+        }
+        
+        /* Marquee */
+        .marquee-container {
+            background-color: var(--light-pink);
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .marquee {
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+            color: var(--dark-pink);
+            font-weight: bold;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Main layout */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 200px);
+        }
+        
+        /* Sidebar navigation */
+        .sidebar {
+            width: 250px;
+            background-color: var(--light-pink);
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sidebar a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: left 0.5s;
+        }
+        
+        .sidebar a:hover::before {
+            left: 100%;
+        }
+        
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+            padding-left: 30px;
+        }
+        
+        .sidebar a.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        /* Main content */
+        .main-content {
+            flex: 1;
+            padding: 25px;
+            background-color: var(--white);
+        }
+        
+        .exercise {
+            display: none;
+            animation: fadeIn 0.5s;
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .exercise.active {
             display: block;
         }
         
-        .exercise-card {
-            background-color: var(--light-color);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--secondary-color);
-            margin-bottom: 20px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .exercise-card h3 {
-            color: var(--dark-color);
+        .exercise h2 {
+            color: var(--primary-color);
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px dashed var(--secondary-color);
         }
         
-        .form-group {
-            margin-bottom: 15px;
+        .exercise h3 {
+            color: var(--dark-pink);
+            margin: 15px 0 10px;
         }
         
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--dark-color);
-        }
-        
-        input[type="number"],
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid var(--secondary-color);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-        
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.2);
-        }
-        
-        button {
-            background: linear-gradient(to right, var(--primary-color), var(--dark-color));
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .result {
-            margin-top: 15px;
+        .code-block {
+            background-color: var(--light-gray);
             padding: 15px;
-            background-color: white;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary-color);
-            font-weight: bold;
-        }
-        
-        /* Footer styles */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: var(--light-color);
-            color: var(--dark-color);
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .login-form, .signup-form {
-            background-color: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-            border: 1px solid var(--secondary-color);
-        }
-        
-        .login-form h3, .signup-form h3 {
-            color: var(--dark-color);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .checkbox-group input {
-            margin-right: 10px;
-        }
-        
-        .code-example {
-            background-color: #2d2d2d;
-            color: #f8f8f2;
-            padding: 15px;
-            border-radius: 8px;
+            border-radius: 5px;
             margin: 15px 0;
             overflow-x: auto;
             font-family: 'Courier New', monospace;
         }
         
-        .exercise-instruction {
-            background-color: #e8f4fc;
+        .result-box {
+            background-color: var(--light-pink);
             padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border-left: 4px solid #4fc3f7;
+            border-radius: 5px;
+            margin: 15px 0;
         }
         
+        /* Form styling */
+        form {
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--dark-pink);
+        }
+        
+        form input[type="text"],
+        form input[type="number"],
+        form input[type="email"],
+        form input[type="password"],
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 4px;
+            background-color: var(--white);
+        }
+        
+        form input[type="submit"] {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        form input[type="submit"]:hover {
+            background-color: var(--dark-pink);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-pink));
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+        
+        .social-icons {
+            margin-top: 10px;
+        }
+        
+        .social-icons a {
+            color: var(--white);
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive design */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -285,281 +340,269 @@
                 text-align: center;
             }
             
+            .header-right {
+                align-items: center;
+                margin-top: 15px;
+            }
+            
             .author-info {
                 margin-bottom: 15px;
             }
         }
-        
-        /* Hiệu ứng cho các phần tử */
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .shake:hover {
-            animation: shake 0.5s;
-        }
-        
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="author-info">
-            <h2>Nguyễn Văn A</h2>
-            <p>Lớp K63 Robot & AI</p>
+            <h2>Ngô Khánh Linh</h2>
+            <p>Lớp: Robot và Trí tuệ nhân tạo</p>
+            <p>Khóa: 63</p>
+            <p>Khoa: Điện-Điện tử</p>
         </div>
-        <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Ảnh đại diện" class="header-image">
+        <div class="header-right">
+            <img src="https://placehold.co/120x120/ff4081/ffffff?text=NKLinH" alt="Ảnh đại diện" class="header-image">
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm...">
+                <button type="submit">🔍</button>
+            </div>
+        </div>
     </header>
     
-    <div class="marquee">
-        <marquee behavior="scroll" direction="left">Chào mừng bạn đến với trang web học PHP! - Hãy khám phá các bài tập thú vị bên dưới!</marquee>
+    <!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee">Chào mừng bạn đến với trang web học PHP! • Hãy khám phá các bài tập thú vị bên dưới • Chúc bạn học tập hiệu quả!</div>
     </div>
     
+    <!-- Main container -->
     <div class="container">
-        <div class="sidebar">
-            <ul class="menu">
-                <li class="menu-item active" data-target="exercise1">Bài 1: Tổng số nguyên tố</li>
-                <li class="menu-item" data-target="exercise2a">Bài 2a: Tổng chuỗi n/(n+1)</li>
-                <li class="menu-item" data-target="exercise2b">Bài 2b: Tổng chuỗi 1/(n+2)</li>
-                <li class="menu-item" data-target="exercise3">Bài 3: Tính biểu thức</li>
-                <li class="menu-item" data-target="exercise4">Bài 4: Nhập số đến 0</li>
-                <li class="menu-item" data-target="exercise5">Bài 5: Số hoàn hảo</li>
-                <li class="menu-item" data-target="exercise6">Bài 6: Giai thừa</li>
-                <li class="menu-item" data-target="exercise7">Bài 7: Ước số</li>
-                <li class="menu-item" data-target="exercise8">Bài 8: Mảng số nguyên</li>
-                <li class="menu-item" data-target="exercise9">Bài 9: Chuyển đổi giây</li>
-                <li class="menu-item" data-target="exercise10">Bài 10: Class Person</li>
-                <li class="menu-item" data-target="exercise11">Bài 11: Form đăng nhập</li>
+        <!-- Sidebar navigation -->
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#" class="nav-link active" data-target="exercise1">Bài 1: Tổng số nguyên tố</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise2">Bài 2: Tổng chuỗi</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise3">Bài 3: Tính giá trị biểu thức</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise4">Bài 4: Nhập số đến 0</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise5">Bài 5: Số hoàn hảo</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise6">Bài 6: Giai thừa</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise7">Bài 7: Ước số</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise8">Bài 8: Mảng số nguyên</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise9">Bài 9: Chuyển đổi thời gian</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise10">Bài 10: Class Person</a></li>
+                <li><a href="#" class="nav-link" data-target="exercise11">Bài 11: Form đăng nhập</a></li>
             </ul>
-        </div>
+        </nav>
         
-        <div class="main-content">
-            <!-- Bài tập 1: Tính tổng số nguyên tố từ 1 đến 100 -->
-            <div id="exercise1" class="exercise-content active">
-                <div class="exercise-instruction">
-                    <h3>Yêu cầu:</h3>
-                    <p>Tính và in tổng các số nguyên tố từ 1 đến 100</p>
-                </div>
-                
-                <div class="exercise-card shake">
-                    <h3>Bài 1: Tổng số nguyên tố (1-100)</h3>
-                    <button onclick="calculatePrimeSum()">Tính tổng</button>
-                    <div id="primeResult" class="result"></div>
-                </div>
-                
-                <div class="code-example">
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- Exercise 1 -->
+            <section id="exercise1" class="exercise active">
+                <h2>Bài 1: Tính và in tổng các số nguyên tố từ 1 đến 100</h2>
+                <div class="code-block">
                     <pre><code>
 // Hàm kiểm tra số nguyên tố
-function isPrime(num) {
-    if (num <= 1) return false;
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) return false;
+function isPrime($num) {
+    if ($num < 2) return false;
+    for ($i = 2; $i <= sqrt($num); $i++) {
+        if ($num % $i == 0) return false;
     }
     return true;
 }
 
 // Tính tổng số nguyên tố từ 1 đến 100
-function calculatePrimeSum() {
-    let sum = 0;
-    for (let num = 2; num <= 100; num++) {
-        if (isPrime(num)) {
-            sum += num;
-        }
+$sum = 0;
+for ($i = 1; $i <= 100; $i++) {
+    if (isPrime($i)) {
+        $sum += $i;
     }
-    return sum;
 }
+echo "Tổng các số nguyên tố từ 1 đến 100 là: " . $sum;
                     </code></pre>
                 </div>
-            </div>
+                <div class="result-box">
+                    <h3>Kết quả:</h3>
+                    <p id="result1">Đang tính toán...</p>
+                </div>
+            </section>
             
-            <!-- Bài tập 2a: Tính tổng chuỗi T = 1/2 + 2/3 + 3/4 + … n/n+1 -->
-            <div id="exercise2a" class="exercise-content">
-                <div class="exercise-instruction">
-                    <h3>Yêu cầu:</h3>
-                    <p>Sử dụng vòng lặp không xác định để tính tổng chuỗi: T = 1/2 + 2/3 + 3/4 + … n/n+1</p>
+            <!-- Exercise 2 -->
+            <section id="exercise2" class="exercise">
+                <h2>Bài 2: Tính tổng chuỗi</h2>
+                <h3>a. T = 1/2 + 2/3 + 3/4 + … n/n+1</h3>
+                <div class="code-block">
+                    <pre><code>
+function calculateSeriesA($n) {
+    $sum = 0;
+    for ($i = 1; $i <= $n; $i++) {
+        $sum += $i / ($i + 1);
+    }
+    return $sum;
+}
+
+$n = 10; // Giá trị n có thể thay đổi
+$resultA = calculateSeriesA($n);
+echo "Tổng chuỗi a với n = $n là: " . round($resultA, 4);
+                    </code></pre>
                 </div>
                 
-                <div class="exercise-card shake">
-                    <h3>Bài 2a: Tổng chuỗi n/(n+1)</h3>
-                    <div class="form-group">
-                        <label for="nValue2a">Nhập giá trị n:</label>
-                        <input type="number" id="nValue2a" min="1" value="10">
-                    </div>
-                    <button onclick="calculateSeries2a()">Tính tổng</button>
-                    <div id="series2aResult" class="result"></div>
+                <h3>b. T = 1/2 + 1/4 + 1/6 + …. 1/n+2 với e > 0.0001</h3>
+                <div class="code-block">
+                    <pre><code>
+function calculateSeriesB() {
+    $sum = 0;
+    $n = 2;
+    $term = 1 / $n;
+    
+    while ($term > 0.0001) {
+        $sum += $term;
+        $n += 2;
+        $term = 1 / $n;
+    }
+    
+    return array('sum' => $sum, 'terms' => $n / 2 - 1);
+}
+
+$resultB = calculateSeriesB();
+echo "Tổng chuỗi b là: " . round($resultB['sum'], 4);
+echo "&lt;br&gt;Số phần tử: " . $resultB['terms'];
+                    </code></pre>
                 </div>
-            </div>
+            </section>
             
-            <!-- Bài tập 2b: Tính tổng chuỗi T = 1/2 + 1/4 + 1/6 + …. 1/n+2 -->
-            <div id="exercise2b" class="exercise-content">
-                <div class="exercise-instruction">
-                    <h3>Yêu cầu:</h3>
-                    <p>Sử dụng vòng lặp không xác định để tính tổng chuỗi: T = 1/2 + 1/4 + 1/6 + …. 1/n+2 với điều kiện e = 1/n+2 > 0.0001</p>
-                </div>
-                
-                <div class="exercise-card shake">
-                    <h3>Bài 2b: Tổng chuỗi 1/(n+2)</h3>
-                    <button onclick="calculateSeries2b()">Tính tổng (e > 0.0001)</button>
-                    <div id="series2bResult" class="result"></div>
-                </div>
-            </div>
+            <!-- Các bài tập khác sẽ được thêm tương tự -->
+            <section id="exercise3" class="exercise">
+                <h2>Bài 3: Tính giá trị biểu thức</h2>
+                <p>Nội dung bài 3 sẽ được hiển thị ở đây...</p>
+            </section>
             
-            <!-- Các bài tập khác được đặt ở đây (giới hạn ký tự nên tôi lược bỏ) -->
-            <!-- Bài 3 đến Bài 11 sẽ có cấu trúc tương tự -->
+            <section id="exercise4" class="exercise">
+                <h2>Bài 4: Nhập số đến khi gặp số 0</h2>
+                <p>Nội dung bài 4 sẽ được hiển thị ở đây...</p>
+            </section>
             
-            <!-- Bài tập 11: Form đăng nhập/đăng ký -->
-            <div id="exercise11" class="exercise-content">
-                <div class="exercise-instruction">
-                    <h3>Yêu cầu:</h3>
-                    <p>Tạo form giao diện đăng nhập và đăng ký với Facebook</p>
-                </div>
-                
-                <div class="login-form">
+            <section id="exercise5" class="exercise">
+                <h2>Bài 5: Kiểm tra số hoàn hảo</h2>
+                <p>Nội dung bài 5 sẽ được hiển thị ở đây...</p>
+            </section>
+            
+            <!-- Bài 11: Form đăng nhập -->
+            <section id="exercise11" class="exercise">
+                <h2>Bài 11: Tạo form đăng nhập</h2>
+                <div class="form-container">
                     <h3>Login with Facebook</h3>
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username">
+                    
+                    <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px; margin-right: 20px;">
+                            <h4>Login</h4>
+                            <form>
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username">
+                                
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password">
+                                
+                                <label style="display: inline-block; margin-right: 10px;">
+                                    <input type="checkbox" name="remember"> Remember Me
+                                </label>
+                                
+                                <input type="submit" value="Log In">
+                            </form>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4>Signup for New Account?</h4>
+                            <form>
+                                <label for="new-username">User Name</label>
+                                <input type="text" id="new-username" name="new-username">
+                                
+                                <label for="email">User Email *</label>
+                                <input type="email" id="email" name="email" required>
+                                
+                                <label for="title">Select Title</label>
+                                <select id="title" name="title">
+                                    <option value="mr">Mr.</option>
+                                    <option value="mrs">Mrs.</option>
+                                    <option value="ms">Ms.</option>
+                                    <option value="dr">Dr.</option>
+                                </select>
+                                
+                                <label for="fullname">Full name * BLOCK letters</label>
+                                <input type="text" id="fullname" name="fullname" required style="text-transform: uppercase;">
+                                
+                                <h4>Company detail</h4>
+                                <p>Provide detail about your company</p>
+                                
+                                <label for="company">Company name</label>
+                                <input type="text" id="company" name="company">
+                                
+                                <label style="display: block; margin-bottom: 15px;">
+                                    <input type="checkbox" name="agree" required> I am agree with registration
+                                </label>
+                                
+                                <input type="submit" value="Register">
+                            </form>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password">
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">Remember Me</label>
-                    </div>
-                    <button>Log In</button>
                 </div>
-                
-                <div class="signup-form">
-                    <h3>Signup for New Account</h3>
-                    <div class="form-group">
-                        <label for="userName">User Name</label>
-                        <input type="text" id="userName">
-                    </div>
-                    <div class="form-group">
-                        <label for="userEmail">User Email *</label>
-                        <input type="email" id="userEmail">
-                    </div>
-                    <div class="form-group">
-                        <label for="title">Select Title</label>
-                        <select id="title">
-                            <option>Mr.</option>
-                            <option>Mrs.</option>
-                            <option>Ms.</option>
-                            <option>Dr.</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="fullName">Full name * BLOCK letters</label>
-                        <input type="text" id="fullName" style="text-transform: uppercase;">
-                    </div>
-                    
-                    <h4>Company detail</h4>
-                    <div class="form-group">
-                        <label for="companyDetail">Provide detail about your company</label>
-                        <textarea id="companyDetail" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="companyName">Company name</label>
-                        <input type="text" id="companyName">
-                    </div>
-                    
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="agree">
-                        <label for="agree">I am agree with registration</label>
-                    </div>
-                    
-                    <button>Register</button>
-                </div>
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
     
+    <!-- Footer -->
     <footer>
-        <p>© 2023 - Trang web thực hành PHP | Nguyễn Văn A - Lớp K63 Robot & AI</p>
-        <p>Liên hệ: example@email.com | Ngày cập nhật: 10/11/2023</p>
+        <p>&copy; 2023 - Trang web thực hành PHP</p>
+        <p>Được thiết kế bởi Ngô Khánh Linh - Lớp Robot và Trí tuệ nhân tạo</p>
+        <p>Liên hệ: example@email.com</p>
+        <div class="social-icons">
+            <a href="#">📱</a>
+            <a href="#">💻</a>
+            <a href="#">📧</a>
+        </div>
     </footer>
 
     <script>
-        // Xử lý menu
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // Xóa active từ tất cả các mục menu
-                document.querySelectorAll('.menu-item').forEach(i => {
-                    i.classList.remove('active');
+        // Xử lý chuyển đổi giữa các bài tập
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const exercises = document.querySelectorAll('.exercise');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Xóa lớp active từ tất cả các liên kết và bài tập
+                    navLinks.forEach(item => item.classList.remove('active'));
+                    exercises.forEach(item => item.classList.remove('active'));
+                    
+                    // Thêm lớp active vào liên kết được nhấp
+                    this.classList.add('active');
+                    
+                    // Hiển thị bài tập tương ứng
+                    const targetId = this.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                    
+                    // Cuộn đến bài tập
+                    document.getElementById(targetId).scrollIntoView({behavior: 'smooth'});
                 });
-                
-                // Thêm active cho mục được click
-                this.classList.add('active');
-                
-                // Ẩn tất cả nội dung bài tập
-                document.querySelectorAll('.exercise-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // Hiển thị nội dung bài tập tương ứng
-                const target = this.getAttribute('data-target');
-                document.getElementById(target).classList.add('active');
             });
-        });
-        
-        // Bài 1: Tính tổng số nguyên tố từ 1 đến 100
-        function calculatePrimeSum() {
-            let sum = 0;
-            for (let num = 2; num <= 100; num++) {
-                let isPrime = true;
+            
+            // Tính toán kết quả bài 1
+            function isPrime(num) {
+                if (num < 2) return false;
                 for (let i = 2; i <= Math.sqrt(num); i++) {
-                    if (num % i === 0) {
-                        isPrime = false;
-                        break;
-                    }
+                    if (num % i === 0) return false;
                 }
-                if (isPrime) {
-                    sum += num;
-                }
-            }
-            document.getElementById('primeResult').innerHTML = `Tổng các số nguyên tố từ 1 đến 100 là: <strong>${sum}</strong>`;
-        }
-
-        // Bài 2a: Tính tổng chuỗi T = 1/2 + 2/3 + 3/4 + … n/n+1
-        function calculateSeries2a() {
-            let n = parseInt(document.getElementById('nValue2a').value);
-            let sum = 0;
-            for (let i = 1; i <= n; i++) {
-                sum += i / (i + 1);
-            }
-            document.getElementById('series2aResult').innerHTML = `Tổng chuỗi với n = ${n} là: <strong>${sum.toFixed(4)}</strong>`;
-        }
-
-        // Bài 2b: Tính tổng chuỗi T = 1/2 + 1/4 + 1/6 + …. 1/n+2 với e > 0.0001
-        function calculateSeries2b() {
-            let sum = 0;
-            let n = 2;
-            let term = 1 / n;
-            
-            while (term > 0.0001) {
-                sum += term;
-                n += 2;
-                term = 1 / n;
+                return true;
             }
             
-            document.getElementById('series2bResult').innerHTML = `Tổng chuỗi với e > 0.0001 là: <strong>${sum.toFixed(6)}</strong><br>Số phần tử: ${n/2 - 1}`;
-        }
-
-        // Các hàm xử lý bài tập khác sẽ được thêm vào đây
+            let sum = 0;
+            for (let i = 1; i <= 100; i++) {
+                if (isPrime(i)) {
+                    sum += i;
+                }
+            }
+            document.getElementById('result1').textContent = `Tổng các số nguyên tố từ 1 đến 100 là: ${sum}`;
+        });
     </script>
 </body>
 </html>
