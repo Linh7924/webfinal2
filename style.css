@@ -99,16 +99,22 @@ header::before {
 }
 @keyframes marquee { 0% {transform: translateX(100%);} 100% {transform: translateX(-100%);} }
 
-/* Top horizontal menu (mới) */
+/* Top horizontal menu (căn giữa) */
 .topmenu {
     background: var(--white);
     border-bottom: 1px solid var(--secondary-color);
     box-shadow: 0 2px 6px rgba(0,0,0,.05);
 }
 .topmenu .topmenu-wrap {
-    max-width: 1200px; margin: 0 auto; padding: 8px 16px;
-    display: flex; gap: 12px; flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8px 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center; /* căn giữa các link */
 }
+
 .topmenu a {
     color: var(--primary-color); text-decoration: none;
     padding: 8px 12px; border-radius: 20px; border: 1px solid var(--secondary-color);
