@@ -30,15 +30,16 @@
     </div>
 
     <!-- Top horizontal menu (mới) -->
-    <nav class="topmenu">
-        <div class="topmenu-wrap">
-            <a href="https://www.php.net/" target="_blank" rel="noopener">PHP Manual</a>
-            <a href="https://www.w3schools.com/php/" target="_blank" rel="noopener">W3Schools PHP</a>
-            <a href="https://developer.mozilla.org/" target="_blank" rel="noopener">MDN Web Docs</a>
-            <a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a>
-            <a href="https://www.mysql.com/" target="_blank" rel="noopener">MySQL</a>
-        </div>
-    </nav>
+<nav class="topmenu">
+  <div class="topmenu-wrap">
+    <a href="https://www.php.net/" target="_blank" rel="noopener">PHP Manual</a>
+    <a href="https://www.w3schools.com/php/" target="_blank" rel="noopener">W3Schools PHP</a>
+    <a href="https://developer.mozilla.org/" target="_blank" rel="noopener">MDN Web Docs</a>
+    <a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a>
+    <a href="https://www.mysql.com/" target="_blank" rel="noopener">MySQL</a>
+  </div>
+</nav>
+
     
     <!-- Main container -->
     <div class="container">
@@ -72,76 +73,33 @@
                     <main class="main-content">
                         <!-- Exercise 1 -->
                         <section id="exercise1" class="exercise active">
-                            <h2>Bài 1: Tính và in tổng các số nguyên tố từ 1 đến 100</h2>
-                            <div class="code-block">
-<pre><code>// Hàm kiểm tra số nguyên tố
-function isPrime($num) {
-    if ($num &lt; 2) return false;
-    for ($i = 2; $i &lt;= sqrt($num); $i++) {
-        if ($num % $i == 0) return false;
-    }
-    return true;
-}
+  <h2>Bài 1: Tính và in tổng các số nguyên tố từ 1 đến 100</h2>
+  <p>Hãy nhấn nút bên dưới để hiển thị kết quả.</p>
+  <button type="button" id="btnB1">Kết quả</button>
+  <div class="result-box" style="margin-top:12px;">
+    <h3>Kết quả:</h3>
+    <p id="result1">Chưa có kết quả</p>
+  </div>
+</section>
+<section id="exercise2" class="exercise">
+  <h2>Bài 2: Tính tổng chuỗi</h2>
 
-// Tính tổng số nguyên tố từ 1 đến 100
-$sum = 0;
-for ($i = 1; $i &lt;= 100; $i++) {
-    if (isPrime($i)) {
-        $sum += $i;
-    }
-}
-echo "Tổng các số nguyên tố từ 1 đến 100 là: " . $sum;</code></pre>
-                            </div>
-                            <div class="result-box">
-                                <h3>Kết quả:</h3>
-                                <p id="result1">Đang tính toán...</p>
-                            </div>
-                        </section>
-                        
-                        <!-- Exercise 2 -->
-                        <section id="exercise2" class="exercise">
-                            <h2>Bài 2: Tính tổng chuỗi</h2>
-                            <h3>a. T = 1/2 + 2/3 + 3/4 + … n/n+1</h3>
-                            <div class="code-block">
-<pre><code>function calculateSeriesA($n) {
-    $sum = 0;
-    for ($i = 1; $i &lt;= $n; $i++) {
-        $sum += $i / ($i + 1);
-    }
-    return $sum;
-}
+  <h3>a. T = 1/2 + 2/3 + 3/4 + … + n/(n+1)</h3>
+  <form id="form2a" action="#exercise2" method="post" onsubmit="return false;">
+    <label for="n2">Nhập n (số nguyên dương):</label>
+    <input type="number" id="n2" name="n2" min="1" required>
+    <input type="submit" value="Kết quả">
+  </form>
 
-$n = 10; // Giá trị n có thể thay đổi
-$resultA = calculateSeriesA($n);
-echo "Tổng chuỗi a với n = $n là: " . round($resultA, 4);</code></pre>
-                            </div>
-                            
-                            <h3>b. T = 1/2 + 1/4 + 1/6 + …. 1/n+2 với e &gt; 0.0001</h3>
-                            <div class="code-block">
-<pre><code>function calculateSeriesB() {
-    $sum = 0;
-    $n = 2;
-    $term = 1 / $n;
-    
-    while ($term &gt; 0.0001) {
-        $sum += $term;
-        $n += 2;
-        $term = 1 / $n;
-    }
-    
-    return array('sum' =&gt; $sum, 'terms' =&gt; $n / 2 - 1);
-}
+  <h3 style="margin-top:12px;">b. T = 1/2 + 1/4 + 1/6 + … + 1/(n+2) (dừng khi hạng tử ≤ 0.0001)</h3>
+  <button type="button" id="btnB2b">Kết quả</button>
 
-$resultB = calculateSeriesB();
-echo "Tổng chuỗi b là: " . round($resultB['sum'], 4);
-echo "&lt;br&gt;Số phần tử: " . $resultB['terms'];</code></pre>
-                            </div>
-                            <div class="result-box">
-                                <h3>Kết quả:</h3>
-                                <p id="result2">Đang tính toán...</p>
-                            </div>
-                        </section>
-                        
+  <div class="result-box">
+    <h3>Kết quả:</h3>
+    <p id="result2">Chưa có kết quả</p>
+  </div>
+</section>
+
                         <!-- Exercise 3 -->
                         <section id="exercise3" class="exercise">
                             <h2>Bài 3: Tính giá trị biểu thức S = 1 + 1/2 + 1/3 + ... + 1/n</h2>
